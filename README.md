@@ -1,6 +1,6 @@
 # FIRST MICROSERVICE APP
 
-`npx create-react-app {client}`
+`npx create-react-app {CLIENT_NAME}`
 
 `npm init -y`
 
@@ -47,3 +47,9 @@ RESPONSE:
     "title": "First Post"
 }
 ```
+Run Node Server
+
+`npm start`
+
+Run React Server
+``
