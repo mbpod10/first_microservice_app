@@ -2,6 +2,8 @@ const express = require('express')
 const bodyParser = require('body-parser')
 const { randomBytes } = require('crypto')
 const app = express()
+const cors = require('cors')
+app.use(cors())
 app.use(bodyParser.json())
 const posts = {}
 

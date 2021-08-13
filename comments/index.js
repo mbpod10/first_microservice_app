@@ -1,8 +1,8 @@
 const express = require('express')
 const bodyParser = require('body-parser')
 const { randomBytes } = require('crypto')
-const cors = require('cors')
 const app = express()
+const cors = require('cors')
 app.use(cors())
 app.use(bodyParser.json())
 

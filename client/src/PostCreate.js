@@ -1,19 +1,20 @@
 import React from 'react'
 import axios from 'axios'
-import { useEffect, useState } from 'react'
+import { useState } from 'react'
 
 const PostCreate = () => {
   const [formTitle, setFormTitle] = useState("")
 
-  const handleSubmit = (event) => {
+  const handleSubmit = async (event) => {
+    event.preventDefault()
     console.log("SUBMIT")
-    axios.post('http://localhost:4001/posts/123/comments', {
-      "content": formTitle
+    await axios.post('http://localhost:4000/posts', {
+      "title": formTitle
     }).then(res => {
       console.log(res)
       console.log(res.data)
     })
-    event.preventDefault()
+    setFormTitle("")
   }
 
   const handleChange = (event) => {
@@ -26,6 +27,7 @@ const PostCreate = () => {
         <div className='form-group'>
           <label>Title</label>
           <input className='form-control' value={formTitle} onChange={handleChange} />
+          {/* <input className='form-control' value={formTitle} onChange={e => handleChange(e.target.value)} /> */}
         </div>
         <button className="btn btn-primary" ha>Submit</button>
       </form>
