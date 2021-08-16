@@ -10,7 +10,7 @@ app.use(cors())
 
 app.post('/events', (req, res) => {
   const event = req.body
-
+  //SEND TO http://localhost:4000/events ROUTE
   axios.post('http://localhost:4000/events', event).catch((err) => {
     console.log(err.message);
   });

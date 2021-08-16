@@ -22,6 +22,7 @@ app.post('/posts', async (req, res) => {
     id, title
   }
 
+  // SEND REQUEST TO EVENT BUS AFTER SENDING TO '/posts'
   await axios.post('http://localhost:4005/events', {
     type: 'PostCreated',
     data: {
@@ -32,10 +33,9 @@ app.post('/posts', async (req, res) => {
   res.status(201).send(posts[id])
 })
 
+// AFTER SENDING IN POSTS, THIS IS CALLED AFTER SEND TO EVENT-BUS
 app.post('/events', (req, res) => {
   console.log('received event', req.body.type)
-  // console.log(req.body)
-
   res.send({})
 })
 

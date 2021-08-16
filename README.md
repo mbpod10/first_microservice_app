@@ -1,55 +1,39 @@
-# FIRST MICROSERVICE APP
+# The Microservice
+- We will use an event bus and a query server
 
-`npx create-react-app {CLIENT_NAME}`
+## Data Cycle
 
-`npm init -y`
+1. React server gets data and sends data to `localhost/posts` server
+2. In `localhost/posts` `POST` route, another API call is sent to `EVENT BUS` (4005)
+```js
+app.post('/posts', async (req, res) => {
+  const id = randomBytes(4).toString('hex')
+  const { title } = req.body
 
-`npm install nodemon axios cors express`
-
-client = react
-comments = node
-posts = node
-
-`package.json`: replace default with `"start": "nodemon index.js"`
-```json
-{
-  "name": "posts",
-  "version": "1.0.0",
-  "description": "",
-  "main": "index.js",
-  "scripts": {
-    "start": "nodemon index.js"
-  },
-  "keywords": [],
-  "author": "",
-  "license": "ISC",
-  "dependencies": {
-    "axios": "^0.21.1",
-    "cors": "^2.8.5",
-    "express": "^4.17.1",
-    "nodemon": "^2.0.12"
+  posts[id] = {
+    id, title
   }
-}
+  // SEND REQUEST TO EVENT BUS AFTER SENDING TO '/posts'
+  await axios.post('http://localhost:4005/events', {
+    type: 'PostCreated',
+    data: {
+      id, title
+    }
+  })
+  res.status(201).send(posts[id])
+})
 ```
+3. In the `EVENT BUS` router, the route is triggered and the `EVENT BUS` triggers another call to the previous router `http://localhost:4000/events`:
+```js
+// DATA SENT IS BY REQ.BODY
+app.post('/events', (req, res) => {
+  const event = req.body
 
-## Test Posts Request
-  `localhost:4000/posts`
-PostMan `post` request -- RAW
-```json
-{
-    "title": "First Post"
-}
+  //SEND TO http://localhost:4000/events ROUTE
+  axios.post('http://localhost:4000/events', event).catch((err) => {
+    console.log(err.message);
+  });
+
+  res.send({ status: 'OK' })
+})
 ```
-RESPONSE:
-```json
-{
-    "id": "35869e94",
-    "title": "First Post"
-}
-```
-Run Node Server
-
-`npm start`
-
-Run React Server
-``
