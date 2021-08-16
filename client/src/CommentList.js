@@ -17,14 +17,16 @@ const CommentList = (props) => {
 
   const commentArray = commentList.map((element, index) => {
     return (
-      <p>{element.content}</p>
+      <li key={element.id}>{element.content}</li>
     )
   })
 
   return (
     <>
-      <p>Comments ({commentList.length})</p>
-      {commentList ? commentArray : null}
+      <p>({commentList.length}) comments</p>
+      <ul>
+        {commentList ? commentArray : null}
+      </ul>
     </>
   )
 }

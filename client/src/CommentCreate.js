@@ -6,7 +6,6 @@ const CommentCreate = (props) => {
   const [commentBody, createCommentBody] = useState("")
 
   const handleChange = (event) => {
-    console.log(event.target.value)
     createCommentBody(event.target.value)
   }
 

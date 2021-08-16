@@ -23,7 +23,6 @@ const PostList = () => {
       <div key={element} className="card" style={{ width: '30%', marginBottom: '20px' }}>
         <div className='card-body'>
           <h3>{element.title}</h3>
-          {/* <h3>{element.id}</h3> */}
           <CommentList id={element.id} />
           <hr />
           <CommentCreate id={element.id} />
