@@ -1,6 +1,8 @@
 import axios from 'axios'
 import React from 'react'
 import { useEffect, useState } from 'react'
+import CommentCreate from './CommentCreate'
+import CommentList from './CommentList'
 
 const PostList = () => {
 
@@ -9,27 +11,31 @@ const PostList = () => {
   useEffect(() => {
     const makeApiCall = async () => {
       await axios.get('http://localhost:4000/posts').then(res => {
-        // console.log(res.data)
         createPostList(res.data)
       })
     }
     makeApiCall()
   }, [])
-  console.log(postList)
 
-  const postListArray = Object.keys(postList).map((element, index) => {
+
+  const postListArray = Object.values(postList).map((element, index) => {
     return (
-      <>
-        <h3>Title: {postList[element].title}</h3>
-        <p>ID: {postList[element].id}</p>
-      </>
+      <div key={element} className="card" style={{ width: '30%', marginBottom: '20px' }}>
+        <div className='card-body'>
+          <h3>{element.title}</h3>
+          {/* <h3>{element.id}</h3> */}
+          <CommentList id={element.id} />
+          <hr />
+          <CommentCreate id={element.id} />
+        </div>
+      </div>
     )
   })
 
   return (
-    <>
+    <div className="d-flex flex-row flex-wrap justify-content-between">
       {postListArray}
-    </>
+    </div>
   )
 }
 
