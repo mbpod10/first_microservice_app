@@ -43,5 +43,5 @@ app.post('/events', (req, res) => {
 })
 
 app.listen(4001, () => {
-  console.log('LISTENING ON PORT: 4001')
+  console.log('COMMENTS LISTENING ON PORT: 4001')
 })

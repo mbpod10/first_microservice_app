@@ -10,6 +10,8 @@ app.use(cors())
 
 app.post('/events', (req, res) => {
   const event = req.body
+  console.log("EVENT BUS")
+  console.log(req.body)
   //SEND TO http://localhost:4000/events ROUTE
   axios.post('http://localhost:4000/events', event).catch((err) => {
     console.log(err.message);
@@ -25,5 +27,5 @@ app.post('/events', (req, res) => {
 })
 
 app.listen(4005, () => {
-  console.log("Listening on 4005")
+  console.log("EVENT BUS Listening on 4005")
 })

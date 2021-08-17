@@ -10,7 +10,7 @@ const PostList = () => {
 
   useEffect(() => {
     const makeApiCall = async () => {
-      await axios.get('http://localhost:4000/posts').then(res => {
+      await axios.get('http://localhost:4002/posts').then(res => {
         createPostList(res.data)
       })
     }
@@ -23,7 +23,7 @@ const PostList = () => {
       <div key={element} className="card" style={{ width: '30%', marginBottom: '20px' }}>
         <div className='card-body'>
           <h3>{element.title}</h3>
-          <CommentList id={element.id} />
+          <CommentList comments={element.comments} />
           <hr />
           <CommentCreate id={element.id} />
         </div>
