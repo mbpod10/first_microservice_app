@@ -7,7 +7,7 @@
 | POSTS              | `http://localhost:4000` |  POST posts to server, communicate with event bus |
 | COMMENTS           | `http://localhost:4001` |                        POST comments to event bus |
 | QUERY              | `http://localhost:4002` |         sole service for GET requests client side |
-| COMMENT MODERATION | `http://localhost:4003` |            moderate comments for ceratin language |
+| COMMENT MODERATION | `http://localhost:4003` |            moderate comments for certain language |
 | N/A                | `http://localhost:4004` |                                             $1600 |
 | EVENT BUS          | `http://localhost:4005` | broker between all servers when requests are made |
 
