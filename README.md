@@ -1,5 +1,15 @@
 # The Microservice
 - We will use an event bus and a query server
+  
+| Servers            |       Local Host        |                                          Function |
+| ------------------ | :---------------------: | ------------------------------------------------: |
+| react app          | `http://localhost:3000` |                                Client-side server |
+| POSTS              | `http://localhost:4000` |  POST posts to server, communicate with event bus |
+| COMMENTS           | `http://localhost:4001` |                        POST comments to event bus |
+| QUERY              | `http://localhost:4002` |         sole service for GET requests client side |
+| COMMENT MODERATION | `http://localhost:4003` |            moderate comments for ceratin language |
+| N/A                | `http://localhost:4004` |                                             $1600 |
+| EVENT BUS          | `http://localhost:4005` | broker between all servers when requests are made |
 
 ## Data Cycle
 
@@ -74,3 +84,6 @@ app.listen(4005, () => {
 })
 ```
 5. Now we have the ability to fetch data from the `QUERY SERVICE` and display it in our React app without needing to make GET requests to our `/posts` and `/comments` servers. We just make one request to `'http://localhost:4002/posts'` which is our `query service`. (the `query service` endpoint `/posts` just send the whole `posts` object to the client) We can now kill both the `/posts` and `/comments` servers and still be able to make GET requests and retrieve the posts and comments data. <e>However, we cannot make post requests! </e>
+  
+## Filter and Moderate Comments
+- make a new service
