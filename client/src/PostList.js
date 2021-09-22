@@ -19,6 +19,7 @@ const PostList = () => {
 
 
   const postListArray = Object.values(postList).map((element, index) => {
+    console.log(element)
     return (
       <div key={element} className="card" style={{ width: '30%', marginBottom: '20px' }}>
         <div className='card-body'>
